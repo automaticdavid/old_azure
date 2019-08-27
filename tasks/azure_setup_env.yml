@@ -27,8 +27,6 @@
     virtual_network_name: "{{ az_virtualnet_name }}"
     address_prefix_cidr: "{{ az_sub_cidr_prefix }}"
     state: present
-    tags:
-      purpose: "{{ az_environment }}"
 
 - name: Create "{{ az_storageaccount_name }}" Storage Account for "{{ az_resourcegroup_name }}"
   local_action:
@@ -40,8 +38,6 @@
     kind: "{{ az_storageaccount_kind }}"
     # access_tier: "{{ az_storageaccount_tier }}"
     state: present
-    tags:
-      purpose: "{{ az_environment }}"
 
 - name: Create {{ az_availabilitysets_name }}
   local_action:
