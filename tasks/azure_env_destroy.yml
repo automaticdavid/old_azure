@@ -1,48 +1,8 @@
 ---
-- name: Delete {{ az_loadbalancer_name }}
-  local_action:
-    module: azure_rm_loadbalancer
-    resource_group: "{{ az_resourcegroup_name }}"
-    name: "{{ az_loadbalancer_name }}"
-    location: "{{ az_location }}"
-    state: absent
-
-- name: Delete public ip for {{ az_loadbalancer_name }}
-  local_action:
-    module: azure_rm_publicipaddress
-    resource_group: "{{ az_resourcegroup_name }}"
-    name: "{{ az_lb_public_ip_name }}"
-    state: absent
-
-- name: Delete  "{{ az_storageaccount_name }}" Storage Account for "{{ az_resourcegroup_name }}"
-  local_action:
-    module: azure_rm_storageaccount
-    name: "{{ az_storageaccount_name }}"
-    resource_group: "{{ az_resourcegroup_name }}"
-    location: "{{ az_location }}"
-    type: "{{ az_storageaccount_type }}"
-    kind: "{{ az_storageaccount_kind }}"
-    state: absent
-
-- name:  Delete {{ az_subnet_name }} Subnet on {{ az_region }}
-  local_action:
-    module: azure_rm_subnet
-    name: "{{ az_subnet_name }}"
-    resource_group: "{{ az_resourcegroup_name }}"
-    virtual_network_name: "{{ az_virtualnet_name }}"
-    state: absent
-
-- name:  Create {{ az_virtualnet_name }} Virtual Network on {{ az_region }}
-  local_action:
-    module: azure_rm_virtualnetwork
-    location: "{{ az_location }}"
-    resource_group: "{{ az_resourcegroup_name }}"
-    name: "{{ az_virtualnet_name }}"
-    state: absent
-
-- name:  Create {{ az_resourcegroup_name }} Resource Group on {{ az_region }}
+- name:  Delete {{ az_resourcegroup_name }} Resource Group on {{ az_region }}
   local_action:
     module: azure_rm_resourcegroup
     location: "{{ az_location }}"
     name: "{{ az_resourcegroup_name }}"
     state: absent
+    force: yes
