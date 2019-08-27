@@ -5,8 +5,6 @@
     location: "{{ az_location }}"
     name: "{{ az_resourcegroup_name }}"
     state: present
-    tags:
-      purpose: "{{ az_environment }}"
 
 - name:  Create {{ az_virtualnet_name }} Virtual Network on {{ az_region }}
   local_action:
@@ -16,8 +14,6 @@
     name: "{{ az_virtualnet_name }}"
     address_prefixes_cidr: "{{ az_vn_cidr_prefix }}"
     state: present
-    tags:
-      purpose: "{{ az_environment }}"
 
 - name:  Create {{ az_subnet_name }} Subnet on {{ az_region }}
   local_action:
