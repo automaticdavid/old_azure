@@ -29,6 +29,7 @@
     module: azure_rm_subnet
     name: "{{ az_subnet_name }}"
     resource_group: "{{ az_resourcegroup_name }}"
+    virtual_network_name: "{{ az_virtualnet_name }}"
     state: absent
 
 - name:  Create {{ az_virtualnet_name }} Virtual Network on {{ az_region }}
