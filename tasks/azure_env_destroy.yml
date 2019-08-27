@@ -43,6 +43,7 @@
     allocation_method: "{{ az_public_ip_method }}"
     name: "{{ az_lb_public_ip_name }}"
     domain_name_label: "{{ az_lb_domain_name_label }}"
+    state: absent
   register: r_lb_public_ip
 
 - name: Create {{ az_loadbalancer_name }}
@@ -72,4 +73,4 @@
         frontend_port: "{{ az_loadbalancer_fport }}"
         backend_port: "{{ az_loadbalancer_bport }}"
         idle_timeout: 4
-    state: present
+    state: absent
