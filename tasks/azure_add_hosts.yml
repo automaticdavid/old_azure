@@ -17,20 +17,24 @@
 - name: Get the public ip address
   azure_rm_publicipaddress:
     resource_group: "{{ az_resourcegroup_name }}"
-    name:  "{{ az_scope }}-1-public"
+    name:  "{{ az_scope }}-{{ item }}-public"
     allocation_method: Dynamic
+  with_sequence: count="{{az_count}}" 
   register: public_ip
 
 - name: Add hosts to in memory inventory
   add_host:
-    name: "{{ public_ip['state']['ip_address'] }}"
+    name: "{{ item['state']['state']['ip_address'] }}"
     groups: "{{ az_scope }}"
+  with_items: public_ip
 
 - name: Wait for SSH to come up
   wait_for_connection:
     timeout: 600
     sleep: 15
-  delegate_to: "{{ public_ip['state']['ip_address'] }}"
+  delegate_to: "{{ item['state']['ip_address'] }}"
+  with_items: public_ip
+
 
 # - name: Add hosts to in memory inventory
 #   add_host:
