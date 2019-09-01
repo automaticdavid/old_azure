@@ -23,7 +23,7 @@
   register: public_ip
 
 - debug: 
-    var: item
+    var: item.state
   with_items: "{{ public_ip.results }}"
 
 - name: Add hosts to in memory inventory
