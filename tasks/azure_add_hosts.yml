@@ -26,6 +26,8 @@
   delegate_to: "{{ item }}"
   with_items: "{{ ips_to_add }}"
 
+# Sometimes I need to use this role to create public IP VMs
+# Todo: add a role variable to control this
 
 # - name: Get the public ip address
 #   azure_rm_publicipaddress:
