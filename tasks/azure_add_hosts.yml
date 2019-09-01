@@ -22,6 +22,9 @@
   with_sequence: count="{{az_count}}" 
   register: public_ip
 
+- debug: 
+    var: public_ip
+
 - name: Add hosts to in memory inventory
   add_host:
     name: "{{ item['state']['state']['ip_address'] }}"
