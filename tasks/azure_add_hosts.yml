@@ -24,7 +24,7 @@
 
 - debug: 
     var: item
-  with_items: public_ip
+  with_items: "{{ public_ip }}"
 
 - name: Add hosts to in memory inventory
   add_host:
@@ -37,7 +37,7 @@
     timeout: 600
     sleep: 15
   delegate_to: "{{ item['state']['ip_address'] }}"
-  with_items: public_ip
+  with_items: "{{ public_ip }}"
 
 
 # - name: Add hosts to in memory inventory
