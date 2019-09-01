@@ -23,13 +23,14 @@
   register: public_ip
 
 - debug: 
-    var: public_ip
+    var: item
+  with_items: public_ip
 
 - name: Add hosts to in memory inventory
   add_host:
     name: "{{ item['state']['state']['ip_address'] }}"
     groups: "{{ az_scope }}"
-  with_items: public_ip
+  with_items: public_ip.results
 
 - name: Wait for SSH to come up
   wait_for_connection:
