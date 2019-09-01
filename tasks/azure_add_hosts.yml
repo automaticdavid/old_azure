@@ -23,12 +23,12 @@
   register: public_ip
 
 - debug: 
-    var: item.state
+    var: item.state.ip_address
   with_items: "{{ public_ip.results }}"
 
 - name: Add hosts to in memory inventory
   add_host:
-    name: "{{ item['state']['state']['ip_address'] }}"
+    name: "{{ item.state.ip_address }}"
     groups: "{{ az_scope }}"
   with_items: "{{ public_ip.results }}"
 
@@ -36,7 +36,7 @@
   wait_for_connection:
     timeout: 600
     sleep: 15
-  delegate_to: "{{ item['state']['ip_address'] }}"
+  delegate_to: "{{ item.state.ip_address }}"
   with_items: "{{ public_ip.results }}"
 
 
